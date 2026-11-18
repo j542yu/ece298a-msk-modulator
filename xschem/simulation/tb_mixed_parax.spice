@@ -1,0 +1,41 @@
+** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tb_mixed_parax.sch
+**.subckt tb_mixed_parax in enable clk rst_n out
+*.ipin in
+*.ipin enable
+*.ipin clk
+*.ipin rst_n
+*.opin out
+x1 net1 net2 net3 net4 net5 net6 net7 net8 net9 net10 net11 net12 in GND net13 enable clk rst_n
++ tt_um_transmit_5_3_parax
+x2 net1 net2 net3 net4 net5 net6 net7 net8 net9 net10 net11 net12 out GND dac_5_3_parax
+V1 net13 GND 3.3
+**** begin user architecture code
+
+.option wnflag=1
+
+.control
+    tran 10n 1us
+    write tb_dac.raw
+.endc
+
+
+
+.include /home/j542yu/Documents/ece298a-msk-modem/xschem/simulation/mixed/modulator_5_3_stimuli.spice
+
+
+.include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  tt_um_transmit_5_3_parax.sym # of pins=18
+** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_transmit_5_3_parax.sym
+.include ../../mag/tt_um_transmit_5_3_parasitics.spice
+
+* expanding   symbol:  dac_5_3_parax.sym # of pins=14
+** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/dac_5_3_parax.sym
+.include ../../mag/dac_5_3.sim.spice
+.GLOBAL GND
+.end

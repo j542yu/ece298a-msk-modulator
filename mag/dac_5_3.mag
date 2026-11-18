@@ -1,9 +1,7 @@
 magic
 tech gf180mcuD
 magscale 1 10
-timestamp 1794414854
-<< error_s >>
-rect 14366 528 14376 4528
+timestamp 1794950245
 << pwell >>
 rect 14379 4741 14753 4921
 rect 4299 119 4673 419
@@ -142,9 +140,9 @@ rect 13418 19 14418 33
 rect 16799 29 17609 33
 rect 17699 -444 18147 33
 use dac_r2r_5_bits  dac_r2r_5_bits_0 ~/Documents/ece298a-msk-modem/mag
-timestamp 1794377923
+timestamp 1794950190
 transform 1 0 -34 0 1 0
-box 0 119 14330 4910
+box 0 119 14320 4910
 use dac_therm_3_bits  dac_therm_3_bits_0
 timestamp 1794379465
 transform 1 0 18846 0 1 119
