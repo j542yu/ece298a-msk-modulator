@@ -1,21 +1,31 @@
 ** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tb_mixed_parax.sch
-**.subckt tb_mixed_parax in enable clk rst_n out
+**.subckt tb_mixed_parax in enable clk rst_n
 *.ipin in
 *.ipin enable
 *.ipin clk
 *.ipin rst_n
-*.opin out
-x1 net1 net2 net3 net4 net5 net6 net7 net8 net9 net10 net11 net12 in GND net13 enable clk rst_n
+x1 B[0] B[1] B[2] B[3] B[4] T[0] T[1] T[2] T[3] T[4] T[5] T[6] GND net1 clk enable in rst_n
 + tt_um_transmit_5_3_parax
-x2 net1 net2 net3 net4 net5 net6 net7 net8 net9 net10 net11 net12 out GND dac_5_3_parax
-V1 net13 GND 3.3
+V1 net1 GND 3.3
+* tap: B[4:0] --> B[0]
+* tap: B[4:0] --> B[1]
+* tap: B[4:0] --> B[2]
+* tap: B[4:0] --> B[3]
+* tap: B[4:0] --> B[4]
+* tap: T[6:0] --> T[0]
+* tap: T[6:0] --> T[1]
+* tap: T[6:0] --> T[2]
+* tap: T[6:0] --> T[3]
+* tap: T[6:0] --> T[4]
+* tap: T[6:0] --> T[5]
+* tap: T[6:0] --> T[6]
 **** begin user architecture code
 
 .option wnflag=1
 
 .control
     tran 10n 1us
-    write tb_dac.raw
+    write tb_transmitter_tt_parax.raw
 .endc
 
 
@@ -32,10 +42,6 @@ V1 net13 GND 3.3
 
 * expanding   symbol:  tt_um_transmit_5_3_parax.sym # of pins=18
 ** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_transmit_5_3_parax.sym
-.include ../../mag/tt_um_transmit_5_3_parasitics.spice
-
-* expanding   symbol:  dac_5_3_parax.sym # of pins=14
-** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/dac_5_3_parax.sym
-.include ../../mag/dac_5_3.sim.spice
+.include ../../mag/spice/tt_um_transmit_5_3_parax.spice
 .GLOBAL GND
 .end

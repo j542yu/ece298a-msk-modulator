@@ -1,0 +1,63 @@
+** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tb_transmit_no_parax.sch
+**.subckt tb_transmit_no_parax in enable clk rst_n ui_in[2] ui_in[3] ui_in[4] ui_in[5] ui_in[6]
+*+ ui_in[7] uio_in[0] uio_in[1] uio_in[2] uio_in[3] uio_in[4] uio_in[5] uio_in[6] uio_in[7] ena
+*.ipin in
+*.ipin enable
+*.ipin clk
+*.ipin rst_n
+*.ipin ui_in[2]
+*.ipin ui_in[3]
+*.ipin ui_in[4]
+*.ipin ui_in[5]
+*.ipin ui_in[6]
+*.ipin ui_in[7]
+*.ipin uio_in[0]
+*.ipin uio_in[1]
+*.ipin uio_in[2]
+*.ipin uio_in[3]
+*.ipin uio_in[4]
+*.ipin uio_in[5]
+*.ipin uio_in[6]
+*.ipin uio_in[7]
+*.ipin ena
+V1 net1 GND 3.3
+* tap: B[4:0] --> B[0]
+* tap: B[4:0] --> B[1]
+* tap: B[4:0] --> B[2]
+* tap: B[4:0] --> B[3]
+* tap: B[4:0] --> B[4]
+* tap: T[6:0] --> T[0]
+* tap: T[6:0] --> T[1]
+* tap: T[6:0] --> T[2]
+* tap: T[6:0] --> T[3]
+* tap: T[6:0] --> T[4]
+* tap: T[6:0] --> T[5]
+* tap: T[6:0] --> T[6]
+x2 B[0] B[1] B[2] B[3] B[4] T[0] T[1] T[2] T[3] T[4] T[5] T[6] GND net1 clk enable in rst_n
++ tt_um_transmit_5_3_no_parax
+**** begin user architecture code
+
+.option wnflag=1
+
+.control
+    tran 10n 1us
+    write tt_um_transmit_5_3_no_parax.raw
+.endc
+
+
+
+.include /home/j542yu/Documents/ece298a-msk-modem/xschem/simulation/stimuli/modulator_5_3_stimuli.spice
+
+
+.include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  tt_um_transmit_5_3_no_parax.sym # of pins=18
+** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_transmit_5_3_no_parax.sym
+.include ../../mag/spice/tt_um_transmit_5_3_no_parax.spice
+.GLOBAL GND
+.end

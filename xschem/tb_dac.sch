@@ -67,7 +67,7 @@ C {code_shown.sym} 1000 -430 0 0 {name=SIM only_toplevel=false value=".option wn
     write tb_dac.raw
 .endc
 "}
-C {code_shown.sym} 1000 -270 0 0 {name=STIMULI only_toplevel=false value=".include dac_ramp_sampling-50.0MHz_3.3V_5_3.spice"}
+C {code_shown.sym} 1000 -270 0 0 {name=STIMULI only_toplevel=false value=".include stimuli/dac_ramp_sampling-50.0MHz_3.3V_5_3.spice"}
 C {code_shown.sym} 1000 -530 0 0 {name=CORNER only_toplevel=false value=".include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical"}

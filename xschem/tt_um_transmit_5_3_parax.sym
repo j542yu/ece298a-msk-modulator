@@ -7,7 +7,7 @@ template="name=x1"
 
 * assuming current dir is xschem/simulation and
 * mag/ is at same level as xschem/
-spice_sym_def=".include ../../mag/tt_um_transmit_5_3_parasitics.spice"}
+spice_sym_def=".include ../../mag/spice/tt_um_transmit_5_3_parax.spice"}
 V {}
 S {}
 E {}
@@ -33,24 +33,43 @@ L 4 60 200 60 220 {}
 L 4 -170 140 -150 140 {}
 L 4 -170 160 -150 160 {}
 L 4 -170 180 -150 180 {}
-B 5 157.5 -152.5 162.5 -147.5 {name=B[0] dir=out}
-B 5 157.5 -122.5 162.5 -117.5 {name=B[1] dir=out}
-B 5 157.5 -92.5 162.5 -87.5 {name=B[2] dir=out}
-B 5 157.5 -62.5 162.5 -57.5 {name=B[3] dir=out}
-B 5 157.5 -32.5 162.5 -27.5 {name=B[4] dir=out}
-B 5 157.5 -2.5 162.5 2.5 {name=T[0] dir=out}
-B 5 157.5 27.5 162.5 32.5 {name=T[1] dir=out}
-B 5 157.5 57.5 162.5 62.5 {name=T[2] dir=out}
-B 5 157.5 87.5 162.5 92.5 {name=T[3] dir=out}
-B 5 157.5 117.5 162.5 122.5 {name=T[4] dir=out}
-B 5 157.5 147.5 162.5 152.5 {name=T[5] dir=out}
-B 5 157.5 177.5 162.5 182.5 {name=T[6] dir=out}
-B 5 -172.5 -152.5 -167.5 -147.5 {name=in dir=in}
-B 5 87.5 217.5 92.5 222.5 {name=VGND dir=inout}
-B 5 57.5 217.5 62.5 222.5 {name=VPWR dir=inout}
-B 5 -172.5 137.5 -167.5 142.5 {name=enable dir=in}
-B 5 -172.5 157.5 -167.5 162.5 {name=clk dir=in}
-B 5 -172.5 177.5 -167.5 182.5 {name=rst_n dir=in}
+B 5 157.5 -152.5 162.5 -147.5 {name=B[0] dir=out 
+sim_pinnumber=1}
+B 5 157.5 -122.5 162.5 -117.5 {name=B[1] dir=out 
+sim_pinnumber=2}
+B 5 157.5 -92.5 162.5 -87.5 {name=B[2] dir=out 
+sim_pinnumber=3}
+B 5 157.5 -62.5 162.5 -57.5 {name=B[3] dir=out 
+sim_pinnumber=4}
+B 5 157.5 -32.5 162.5 -27.5 {name=B[4] dir=out
+
+sim_pinnumber=5}
+B 5 157.5 -2.5 162.5 2.5 {name=T[0] dir=out 
+sim_pinnumber=6}
+B 5 157.5 27.5 162.5 32.5 {name=T[1] dir=out 
+sim_pinnumber=7}
+B 5 157.5 57.5 162.5 62.5 {name=T[2] dir=out 
+sim_pinnumber=8}
+B 5 157.5 87.5 162.5 92.5 {name=T[3] dir=out 
+sim_pinnumber=9}
+B 5 157.5 117.5 162.5 122.5 {name=T[4] dir=out 
+sim_pinnumber=10}
+B 5 157.5 147.5 162.5 152.5 {name=T[5] dir=out 
+sim_pinnumber=11}
+B 5 157.5 177.5 162.5 182.5 {name=T[6] dir=out 
+sim_pinnumber=12}
+B 5 87.5 217.5 92.5 222.5 {name=VGND dir=inout 
+sim_pinnumber=13}
+B 5 57.5 217.5 62.5 222.5 {name=VPWR dir=inout 
+sim_pinnumber=14}
+B 5 -172.5 157.5 -167.5 162.5 {name=clk dir=in 
+sim_pinnumber=15}
+B 5 -172.5 137.5 -167.5 142.5 {name=enable dir=in 
+sim_pinnumber=16}
+B 5 -172.5 -152.5 -167.5 -147.5 {name=in dir=in 
+sim_pinnumber=17}
+B 5 -172.5 177.5 -167.5 182.5 {name=rst_n dir=in 
+sim_pinnumber=18}
 T {B[0]} 135 -154 0 1 0.2 0.2 {}
 T {B[1]} 135 -124 0 1 0.2 0.2 {}
 T {B[2]} 135 -94 0 1 0.2 0.2 {}

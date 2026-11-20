@@ -22,7 +22,7 @@ x2 dac_out b4 b3 b2 b1 b0 t6 t5 t4 t3 t2 t1 t0 0 dac_5_3
 .option wnflag=1
 
 .control
-    tran 1n 2us
+    tran 1n 10us
     * plot dac_ideal mixed_out in
     plot dac_out in
     write mixed.raw

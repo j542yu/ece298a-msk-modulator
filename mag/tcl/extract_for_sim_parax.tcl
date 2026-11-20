@@ -9,13 +9,10 @@ cellname rename tt_um_flat ${project}_parax
 extract all
 ext2sim labels on
 ext2sim
-
 extresist tolerance 10
 extresist
-
 ext2spice lvs
-ext2spice cthresh 1
-ext2spice rthresh 0
+ext2spice cthresh 0
 ext2spice extresist on
 
-ext2spice -o tt_um_transmit_5_3_parasitics.spice
+ext2spice -o ${project}_parax.spice

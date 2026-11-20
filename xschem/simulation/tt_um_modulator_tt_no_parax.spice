@@ -1,0 +1,13 @@
+** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_modulator_tt_no_parax.sym
+**.subckt tt_um_modulator_tt_no_parax
+**** begin user architecture code
+type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+
+* assuming current dir is xschem/simulation and
+* mag/ is at same level as xschem/
+spice_sym_def=".include ../../mag/spice/tt_um_modulator_tt_no_parax.spice"
+**** end user architecture code
+**.ends
+.end
