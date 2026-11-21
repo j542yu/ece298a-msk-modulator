@@ -1,41 +1,34 @@
 ** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tb_mixed_parax.sch
-**.subckt tb_mixed_parax in enable clk rst_n
+**.subckt tb_mixed_parax in enable clk rst_n dac_parax_out
 *.ipin in
 *.ipin enable
 *.ipin clk
 *.ipin rst_n
-x1 B[0] B[1] B[2] B[3] B[4] T[0] T[1] T[2] T[3] T[4] T[5] T[6] GND net1 clk enable in rst_n
-+ tt_um_transmit_5_3_parax
+*.opin dac_parax_out
+x1 b0 b1 b2 b3 b4 t0 t1 t2 t3 t4 t5 t6 GND net1 clk enable in rst_n tt_um_transmit_5_3_parax
 V1 net1 GND 3.3
-* tap: B[4:0] --> B[0]
-* tap: B[4:0] --> B[1]
-* tap: B[4:0] --> B[2]
-* tap: B[4:0] --> B[3]
-* tap: B[4:0] --> B[4]
-* tap: T[6:0] --> T[0]
-* tap: T[6:0] --> T[1]
-* tap: T[6:0] --> T[2]
-* tap: T[6:0] --> T[3]
-* tap: T[6:0] --> T[4]
-* tap: T[6:0] --> T[5]
-* tap: T[6:0] --> T[6]
+x2 b0 b1 b2 b3 b4 t0 t1 t2 t3 t4 t5 t6 dac_parax_out GND dac_5_3_parax
 **** begin user architecture code
 
 .option wnflag=1
 
 .control
-    tran 10n 1us
-    write tb_transmitter_tt_parax.raw
+    tran 5n 850ns
+    write tb_mixed_parax.raw
 .endc
 
 
 
-.include /home/j542yu/Documents/ece298a-msk-modem/xschem/simulation/mixed/modulator_5_3_stimuli.spice
+.include ./stimuli/modulator_5_3_stimuli.spice
 
 
 .include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+
+
+Bideal dac_ideal_out 0 V = (32*(V(t0)+V(t1)+V(t2)+V(t3)+V(t4)+V(t5)+V(t6)) +
++  V(b0)+2*V(b1)+4*V(b2)+8*V(b3)+16*V(b4))/256
 
 **** end user architecture code
 **.ends
@@ -43,5 +36,9 @@ V1 net1 GND 3.3
 * expanding   symbol:  tt_um_transmit_5_3_parax.sym # of pins=18
 ** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_transmit_5_3_parax.sym
 .include ../../mag/spice/tt_um_transmit_5_3_parax.spice
+
+* expanding   symbol:  dac_5_3_parax.sym # of pins=14
+** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/dac_5_3_parax.sym
+.include ../../mag/spice/dac_5_3_parax.spice
 .GLOBAL GND
 .end

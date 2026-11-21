@@ -7,7 +7,7 @@ template="name=x1"
 
 * assuming current dir is xschem/simulation and
 * mag/ is at same level as xschem/
-spice_sym_def=".include ../../mag/dac_5_3.sim.spice"}
+spice_sym_def=".include ../../mag/spice/dac_5_3_parax.spice"}
 V {}
 S {}
 E {}
@@ -29,20 +29,32 @@ L 4 140 -170 140 200 {}
 L 4 -150 200 140 200 {}
 L 4 140 -150 160 -150 {}
 L 4 90 200 90 220 {}
-B 5 -172.5 -152.5 -167.5 -147.5 {name=B[0] dir=in}
-B 5 -172.5 -122.5 -167.5 -117.5 {name=B[1] dir=in}
-B 5 -172.5 -92.5 -167.5 -87.5 {name=B[2] dir=in}
-B 5 -172.5 -62.5 -167.5 -57.5 {name=B[3] dir=in}
-B 5 -172.5 -32.5 -167.5 -27.5 {name=B[4] dir=in}
-B 5 -172.5 -2.5 -167.5 2.5 {name=T[0] dir=in}
-B 5 -172.5 27.5 -167.5 32.5 {name=T[1] dir=in}
-B 5 -172.5 57.5 -167.5 62.5 {name=T[2] dir=in}
-B 5 -172.5 87.5 -167.5 92.5 {name=T[3] dir=in}
-B 5 -172.5 117.5 -167.5 122.5 {name=T[4] dir=in}
-B 5 -172.5 147.5 -167.5 152.5 {name=T[5] dir=in}
-B 5 -172.5 177.5 -167.5 182.5 {name=T[6] dir=in}
-B 5 157.5 -152.5 162.5 -147.5 {name=DAC_OUT dir=out}
-B 5 87.5 217.5 92.5 222.5 {name=VGND dir=inout}
+B 5 -172.5 -152.5 -167.5 -147.5 {name=B[0] dir=in
+sim_pinnumber=1}
+B 5 -172.5 -122.5 -167.5 -117.5 {name=B[1] dir=in
+sim_pinnumber=2}
+B 5 -172.5 -92.5 -167.5 -87.5 {name=B[2] dir=in
+sim_pinnumber=3}
+B 5 -172.5 -62.5 -167.5 -57.5 {name=B[3] dir=in
+sim_pinnumber=4}
+B 5 -172.5 -32.5 -167.5 -27.5 {name=B[4] dir=in
+sim_pinnumber=5}
+B 5 -172.5 -2.5 -167.5 2.5 {name=T[0] dir=in
+sim_pinnumber=6}
+B 5 -172.5 27.5 -167.5 32.5 {name=T[1] dir=in
+sim_pinnumber=7}
+B 5 -172.5 57.5 -167.5 62.5 {name=T[2] dir=in
+sim_pinnumber=8}
+B 5 -172.5 87.5 -167.5 92.5 {name=T[3] dir=in
+sim_pinnumber=9}
+B 5 -172.5 117.5 -167.5 122.5 {name=T[4] dir=in
+sim_pinnumber=10}
+B 5 -172.5 147.5 -167.5 152.5 {name=T[5] dir=in
+sim_pinnumber=11}
+B 5 -172.5 177.5 -167.5 182.5 {name=T[6] dir=in
+sim_pinnumber=12}
+B 5 157.5 -152.5 162.5 -147.5 {name=DAC_OUT dir=out sim_pinnumber=13}
+B 5 87.5 217.5 92.5 222.5 {name=VGND dir=inout sim_pinnumber=14}
 T {B[0]} -145 -154 0 0 0.2 0.2 {}
 T {B[1]} -145 -124 0 0 0.2 0.2 {}
 T {B[2]} -145 -94 0 0 0.2 0.2 {}

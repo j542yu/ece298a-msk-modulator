@@ -38,34 +38,6 @@ unitx=1
 logx=0
 logy=0
 hilight_wave=3}
-N 500 -1040 500 -900 {bus=true
-lab=B[4:0]}
-N 460 -1010 490 -1010 {
-lab=B[0]}
-N 460 -980 490 -980 {
-lab=B[1]}
-N 460 -950 490 -950 {
-lab=B[2]}
-N 460 -920 490 -920 {
-lab=B[3]}
-N 460 -890 490 -890 {
-lab=B[4]}
-N 560 -850 560 -650 {bus=true
-lab=T[6:0]}
-N 470 -860 550 -860 {
-lab=T[0]}
-N 470 -830 550 -830 {
-lab=T[1]}
-N 470 -800 550 -800 {
-lab=T[2]}
-N 470 -770 550 -770 {
-lab=T[3]}
-N 470 -740 550 -740 {
-lab=T[4]}
-N 470 -710 550 -710 {
-lab=T[5]}
-N 470 -680 550 -680 {
-lab=T[6]}
 C {tt_um_transmit_5_3_parax.sym} 310 -860 0 0 {name=x1}
 C {vsource.sym} 370 -610 0 1 {name=V1 value=3.3 savecurrent=false}
 C {gnd.sym} 370 -580 0 1 {name=l1 lab=GND}
@@ -75,31 +47,46 @@ C {ipin.sym} 140 -700 0 0 {name=p3 lab=clk}
 C {ipin.sym} 140 -680 0 0 {name=p4 lab=rst_n}
 C {launcher.sym} 740 -70 0 0 {name=h5
 descr="load waves" 
-tclcommand="xschem raw_read $netlist_dir/tt_um_transmit_5_3_parax.raw tran"
+tclcommand="xschem raw_read $netlist_dir/tb_transmit_parax_nov_20.raw tran"
 }
 C {code_shown.sym} 940 -390 0 0 {name=SIM only_toplevel=false value=".option wnflag=1
 
 .control
     tran 10n 1us
-    write tt_um_transmit_5_3_parax.raw
+    write tb_transmit_parax.raw
 .endc
 "}
 C {code_shown.sym} 940 -230 0 0 {name=STIMULI only_toplevel=false value=".include ./stimuli/modulator_5_3_stimuli.spice"}
 C {code_shown.sym} 940 -490 0 0 {name=CORNER only_toplevel=false value=".include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical"}
-C {lab_pin.sym} 500 -1040 0 1 {lab=B[4:0]}
-C {bus_tap.sym} 500 -1020 3 1 {name=l4 lab=[0]}
-C {bus_tap.sym} 500 -990 3 1 {name=l5 lab=[1]}
-C {bus_tap.sym} 500 -960 3 1 {name=l6 lab=[2]}
-C {bus_tap.sym} 500 -930 3 1 {name=l7 lab=[3]}
-C {bus_tap.sym} 500 -900 3 1 {name=l8 lab=[4]}
-C {lab_pin.sym} 560 -650 0 1 {name=p5 lab=T[6:0]}
-C {bus_tap.sym} 560 -850 0 1 {name=l9 lab=[0]}
-C {bus_tap.sym} 560 -820 0 1 {name=l10 lab=[1]}
-C {bus_tap.sym} 560 -790 0 1 {name=l11 lab=[2]}
-C {bus_tap.sym} 560 -760 0 1 {name=l12 lab=[3]}
-C {bus_tap.sym} 560 -730 0 1 {name=l13 lab=[4]}
-C {bus_tap.sym} 560 -700 0 1 {name=l14 lab=[5]}
-C {bus_tap.sym} 560 -670 0 1 {name=l15 lab=[6]}
 C {gnd.sym} 400 -640 0 0 {name=l2 lab=GND}
+C {code_shown.sym} 920 -890 0 0 {name=IDEAL_DAC only_toplevel=false value=".model ideal_dac_bridge dac_bridge(out_low=0 out_high=3.3)
+
+a_b0 [b0] [vb0] ideal_dac_bridge
+a_b1 [b1] [vb1] ideal_dac_bridge
+a_b2 [b2] [vb2] ideal_dac_bridge
+a_b3 [b3] [vb3] ideal_dac_bridge
+a_b4 [b4] [vb4] ideal_dac_bridge
+
+a_t0 [t0] [vt0] ideal_dac_bridge
+a_t1 [t1] [vt1] ideal_dac_bridge
+a_t2 [t2] [vt2] ideal_dac_bridge
+a_t3 [t3] [vt3] ideal_dac_bridge
+a_t4 [t4] [vt4] ideal_dac_bridge
+a_t5 [t5] [vt5] ideal_dac_bridge
+a_t6 [t6] [vt6] ideal_dac_bridge
+
+Bideal dac_ideal 0 V = (32*(V(vt0)+V(vt1)+V(vt2)+V(vt3)+V(vt4)+V(vt5)+V(vt6)) + V(vb0)+2*V(vb1)+4*V(vb2)+8*V(vb3)+16*V(vb4))/256"}
+C {lab_pin.sym} 470 -1010 0 1 {name=p5 sig_type=std_logic lab=b0}
+C {lab_pin.sym} 470 -980 0 1 {name=p6 sig_type=std_logic lab=b1}
+C {lab_pin.sym} 470 -950 0 1 {name=p7 sig_type=std_logic lab=b2}
+C {lab_pin.sym} 470 -920 0 1 {name=p8 sig_type=std_logic lab=b3}
+C {lab_pin.sym} 470 -890 0 1 {name=p9 sig_type=std_logic lab=b4}
+C {lab_pin.sym} 470 -860 0 1 {name=p10 sig_type=std_logic lab=t0}
+C {lab_pin.sym} 470 -830 0 1 {name=p11 sig_type=std_logic lab=t1}
+C {lab_pin.sym} 470 -800 0 1 {name=p12 sig_type=std_logic lab=t2}
+C {lab_pin.sym} 470 -770 0 1 {name=p13 sig_type=std_logic lab=t3}
+C {lab_pin.sym} 470 -740 0 1 {name=p14 sig_type=std_logic lab=t4}
+C {lab_pin.sym} 470 -710 0 1 {name=p15 sig_type=std_logic lab=t5}
+C {lab_pin.sym} 470 -680 0 1 {name=p16 sig_type=std_logic lab=t6}
