@@ -1,0 +1,48 @@
+magic
+tech gf180mcuD
+timestamp 1795296061
+<< nmos >>
+rect 110 35 190 45
+rect 210 35 290 45
+rect 10 -5 130 5
+rect 140 -5 260 5
+rect 270 -5 420 5
+<< pmos >>
+rect 100 145 300 155
+rect 10 85 180 95
+rect 190 85 360 95
+<< ndiff >>
+rect 110 45 190 55
+rect 210 45 290 55
+rect 110 30 190 35
+rect 210 30 290 35
+rect 110 25 290 30
+rect 10 5 130 15
+rect 140 5 260 15
+rect 270 5 420 15
+rect 10 -10 130 -5
+rect 140 -10 260 -5
+rect 270 -10 420 -5
+rect 10 -15 420 -10
+<< pdiff >>
+rect 100 155 300 175
+rect 100 125 300 145
+rect 10 95 180 115
+rect 190 95 360 115
+rect 10 65 180 85
+rect 190 65 360 85
+<< polysilicon >>
+rect 90 145 100 155
+rect 300 145 310 155
+rect 0 85 10 95
+rect 180 85 190 95
+rect 360 85 370 95
+rect 100 35 110 45
+rect 190 35 195 45
+rect 205 35 210 45
+rect 290 35 300 45
+rect 0 -5 10 5
+rect 130 -5 140 5
+rect 260 -5 270 5
+rect 420 -5 430 5
+<< end >>

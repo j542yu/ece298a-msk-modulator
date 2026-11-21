@@ -122,7 +122,7 @@ as="'int((nf+2)/2) * W/nf * 0.18u'"
 ps="'2*int((nf+2)/2) * (W/nf + 0.18u)'"
 nrd="'0.18u / W'" nrs="'0.18u / W'"
 sa=0 sb=0 sd=0
-model=pfet_03v3
+model=nfet_03v3
 spiceprefix=X
 }
 C {capa.sym} 510 -440 1 0 {name=C1
