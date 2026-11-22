@@ -4,7 +4,7 @@ xschemrc
 **/venv/
 **/__pycache__/
 /xschem/simulation/*.ngspice
-/xschem/simulation/*.raw
+**/*.raw
 magic-src/
 open-pdks/
 runs/
