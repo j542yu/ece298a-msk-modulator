@@ -7,7 +7,7 @@ module tt_um_modulator (
   input wire data_in,
 
   output wire [4:0] B,
-  output wire [6:0] T //, // Correct output occurs one clock cycle after the input signal completes
+  output wire [6:0] T
 );
 
 /*
@@ -37,25 +37,9 @@ parameter IF_OFFSET = 16'h199A;
 // Registers and Wires
 
 reg [15:0] phase;
-reg [7:0] cos_out;
+wire [7:0] cos_out;
 
 cos_lut lut (.angle_in(phase[15:8]), .cos(cos_out));
-
-assign T = {
-    (cos_out[7:5] >= 3'd7),
-    (cos_out[7:5] >= 3'd6),
-    (cos_out[7:5] >= 3'd5),
-    (cos_out[7:5] >= 3'd4),
-    (cos_out[7:5] >= 3'd3),
-    (cos_out[7:5] >= 3'd2),
-    (cos_out[7:5] >= 3'd1)
-};
-
-assign B = {cos_out[4:0]};
-
-// Debug
-// assign phase_debug = phase;
-// assign cos_out_debug = cos_out;
 
 // Two stage FF synchronizer to protect against metastability
 reg in_meta, in_sync;
@@ -90,5 +74,38 @@ always @(posedge clk or negedge rst_n) begin
     end
   end
 end
+
+/* Since the digital logic will directly drive the DAC,
+   adding an output register so that the outputs change
+   at same time instead of having combinational logic between
+   last flop and DAC input due to thermometer decoder
+*/
+
+reg [6:0] T_r;
+reg [4:0] B_r;
+
+always @(posedge clk or negedge rst_n) begin
+  if (!rst_n) begin
+    T_r <= 7'b0;
+    B_r <= 5'b0;
+  end else begin
+    T_r <= {
+      (cos_out[7:5] >= 3'd7), (cos_out[7:5] >= 3'd6),
+      (cos_out[7:5] >= 3'd5), (cos_out[7:5] >= 3'd4),
+      (cos_out[7:5] >= 3'd3), (cos_out[7:5] >= 3'd2),
+      (cos_out[7:5] >= 3'd1)
+    };
+    B_r <= cos_out[4:0];
+  end
+end
+
+assign T = T_r;
+assign B = B_r;
+
+/* Total 4 clock cycles of latency:
+   * First 2 from the 2 flop synchronizer
+   * 1 cycle of latency to wait for phase to update in phase accumulator
+   * 1 cycle of latency to wait for T_r, B_r to update to reflect changed phase
+*/
 
 endmodule

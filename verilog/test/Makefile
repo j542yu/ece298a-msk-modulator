@@ -9,9 +9,6 @@ SRC_DIR = $(PWD)/../rtl
 PROJECT_SOURCES = modulator.v cos_lut.v
 GL_NETLIST_NAME = tt_um_modulator.pnl.v
 
-$(info PWD = $(PWD))
-$(info SRC_DIR = $(SRC_DIR))
-
 ifneq ($(GATES),yes)
 
 # RTL simulation:

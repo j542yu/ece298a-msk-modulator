@@ -1,8 +1,8 @@
 `default_nettype none
 
-// Cosine/sine lookup table
+// Cosine lookup table
 module cos_lut (
-  input reg [7:0] angle_in,
+  input wire [7:0] angle_in,
   output reg [7:0] cos
 );
 

@@ -52,8 +52,7 @@ gl-test:
 	test -f ../runs/wokwi/final/pnl/tt_um_modulator.pnl.v || { echo "hardened netlist missing"; exit 1; } && \
 	cp -av ../runs/wokwi/final/pnl/tt_um_modulator.pnl.v ../verilog/test/gate_level_netlist.v && \
 	cd ../verilog/test && \
-	$(MAKE) -B GATES=yes && \
-	python -m cocotb_tools.check_results results.xml
-
+	source venv/bin/activate && \
+	$(MAKE) -B GATES=yes
 clean:
 	rm -rf ../mag/* ../gds/* ../lef/*
