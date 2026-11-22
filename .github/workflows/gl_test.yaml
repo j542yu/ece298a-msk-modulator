@@ -1,3 +1,9 @@
+name: block-gds-and-gl-test
+
+on:
+  push:
+  workflow_dispatch:
+
 env:
   TT_ARGS: --pdk gf180mcuD --sub-block tt_um_modulator
 
