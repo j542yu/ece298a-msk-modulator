@@ -5,22 +5,19 @@ project:
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Minimum Shift Keying Modulator"      # One line description of what your project does
   language:     "Analog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     50000000       # Clock frequency in Hz (or 0 if not applicable)
+  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 340x160 uM.
   tiles: "1x2"          # Analog tile
-  analog_pins: 2
+  analog_pins: 1
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_ece298a_msk_modulator"
 
-  # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
+  # Omitting remaining files since that's what Matt Venn did in his gf-r2r-dac repo
+  # to make TT tools happy
   source_files:
-    - "project.v"
-    - "modulate_5_3.v"
-    - "cos_lut.v"
+    - "project.v" 
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
@@ -41,7 +38,7 @@ pinout:
   uo[2]: "Binary"
   uo[3]: "Binary"
   uo[4]: "Binary"
-  uo[5]: "Binary"
+  uo[5]: "Thermometer"
   uo[6]: "Thermometer"
   uo[7]: "Thermometer"
 
@@ -57,7 +54,7 @@ pinout:
 
   # Analog
   ua[0]: "tx_out"
-  ua[1]: "buffer_bias"
+  ua[1]: ""
   ua[2]: ""
   ua[3]: ""
   ua[4]: ""

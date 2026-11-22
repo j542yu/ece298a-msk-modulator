@@ -1,0 +1,107 @@
+env:
+  TT_ARGS: --pdk gf180mcuD --sub-block tt_um_modulator
+
+jobs:
+  harden-block:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: tt/requirements.txt
+
+      - name: Install tt-support-tools dependencies
+        run: pip install -r tt/requirements.txt
+
+      - name: Build config
+        run: ./tt/tt_tool.py --create-user-config $TT_ARGS
+
+      - name: Install LibreLane
+        run: pip install librelane==3.0.14
+
+      - name: Harden digital sub-block
+        run: ./tt/tt_tool.py --harden $TT_ARGS
+
+      - name: Show build files (for debugging)
+        run: find runs/wokwi/
+
+      - name: Linter output
+        if: always()
+        run: |
+          LINTER_LOG=(runs/wokwi/*-verilator-lint/verilator-lint.log)
+          LINTER_LOG=${LINTER_LOG[0]}
+
+          if [ -s "$LINTER_LOG" ]; then
+            cat $LINTER_LOG
+
+            set +e
+            count_error=$(egrep -i "^%Error"   $LINTER_LOG | wc -l)
+            count_warn=$( egrep -i "^%Warning" $LINTER_LOG | wc -l)
+            count_other=$(egrep -i "^%"        $LINTER_LOG | egrep -v "%(Warning|Error)" | wc -l)
+            set -e
+
+            open=""
+            summary=""
+            icon=":green_circle:"
+            if [ $count_other -gt 0 ]; then
+              summary="$count_other message(s)"
+              icon=":orange_circle:"
+            fi
+            if [ $count_warn -gt 0 ]; then
+              summary="$count_warn warning(s)"
+              icon=":orange_circle:"
+            fi
+            if [ $count_error -gt 0 ]; then
+              summary="$count_error error(s)"
+              icon=":red_circle:"
+              open="open"
+            fi
+            if [ -n "$summary" ]; then
+              summary="[$summary]"
+            fi
+
+            echo "<details ${open}>" >> $GITHUB_STEP_SUMMARY
+            echo "<summary><h1>Linter output&nbsp;&nbsp;<h4>${summary} ${icon}</h4></h1></summary>" >> $GITHUB_STEP_SUMMARY
+            echo "<pre>" >> $GITHUB_STEP_SUMMARY
+            sed 's/^/    /' < $LINTER_LOG >> $GITHUB_STEP_SUMMARY
+            echo "</pre>" >> $GITHUB_STEP_SUMMARY
+            echo "</details>" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Yosys warnings
+        run: ./tt/tt_tool.py --print-warnings $TT_ARGS >> $GITHUB_STEP_SUMMARY
+
+      - name: Routing summary
+        run: ./tt/tt_tool.py --print-stats $TT_ARGS >> $GITHUB_STEP_SUMMARY
+
+      - name: Cell usage summary
+        run: ./tt/tt_tool.py --print-cell-category $TT_ARGS >> $GITHUB_STEP_SUMMARY
+
+      - name: Publish build logs
+        if: success() || failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: GDS_logs
+          path: |
+            src/*
+            runs/wokwi/*
+
+      - name: Prepare tt_submission
+        run: ./tt/tt_tool.py --create-tt-submission $TT_ARGS
+
+      - name: Publish tt_submission artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: tt_submission
+          path: |
+            verilog/rtl/*
+            tt_submission/*
+            tt_um_modulator_info.yaml
+            LICENSE

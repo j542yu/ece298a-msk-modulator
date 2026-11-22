@@ -9,6 +9,8 @@ magic-src/
 open-pdks/
 runs/
 src/*.json
-test/results.xml
-test/sim_build/
+**/results.xml
+**/sim_build/
+**/*.fst
+**/*.vcd
 **/*_obj_dir
