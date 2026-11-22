@@ -1,0 +1,336 @@
+#!/usr/bin/env python3
+
+# rev 1.0 - 12/30/2021 - using python3
+
+# fixname_lts.pxe file1 file2 file3 ... [-sub 'OLD' 'NEW'] [-quiet] [-o temp_file] [-keep] [-copy] [-linux]
+
+# ########################################################################
+# This program
+#   1. Searches an LTSpice .asc file for the symbol BD_GTitleLTS and changes name to match the filename
+#
+# It first remaps file1 --> temp_file
+#
+# It then does a diff between file1 and temp_file
+# and if there is a difference, it replaces file1 with temp_file
+# and it preserves the permissions of file1
+#
+# It deletes temp_file unless the -keep option is used
+#
+# The default temp_file name is junk_tmp_remap.txt
+#
+# Note - THIS PROGRAM DOES WORK on read-only files as long as you own them
+#
+# In copy mode, the input file is never changed
+#
+# In linux mode it changes permissions to match. (by default permissions are ignored)
+# ########################################################################
+
+import sys
+import math
+import time
+import os
+import shutil
+import re
+import filecmp
+
+total = len(sys.argv)
+
+cmdargs = str(sys.argv)
+
+# ##################################################################
+DEBUG = False
+if (DEBUG):
+  print("The total numbers of args passed to the script: %d " % total)
+  print("Args list: %s " % cmdargs)
+  print("Script name: %s" % str(sys.argv[0]))
+  for i in range(total):
+      print("Argument # %d : %s" % (i, str(sys.argv[i])))
+  print("Leaving")
+# ##################################################################
+
+fnameiList = []
+
+fnameoSet = False
+
+doSubst = False
+keepMode = False
+copyMode = False
+quietMode = False
+linuxMode = False
+
+i = 1
+
+while (i < total):
+
+  name = str(sys.argv[i])
+
+  if (name[0] == '-'):
+
+    if   (name[1:] == 'o'):
+      i = i + 1
+      fnameo = str(sys.argv[i])
+      fnameoSet = True
+
+    elif (name[1:] == 'keep'):
+      keepMode = True
+
+    elif (name[1:] == 'copy'):
+      keepMode = True
+      copyMode = True
+
+    elif (name[1:] == 'quiet'):
+      quietMode = True
+
+    elif (name[1:] == 'linux'):
+      linuxMode = True
+
+    elif (name[1:] == 'h') or (name[1:] == '-h') or (name[1:] == 'help') or (name[1:] == '-help'):
+      print("Usage : lts_fixname.pxe file1.asc file2.asc file3.asc [-quiet] [-o temp_file] [-keep] [-copy] [-linux]")
+      print("      : lts_fixname.pxe *.asc | grep Made")
+      exit(1)
+
+    else:
+      print("Sorry - unknown -key (%s)" % name)
+      exit(0)
+
+  else:
+
+    if (os.path.isfile(name)):
+      fnameiList.append(name)
+
+    elif (os.path.isdir(name)):
+      print ("warning - ignoring directory (%s)" % name)
+
+    else:
+      print ("Sorry - unknown arg (%s)" % name)
+      exit(0)
+
+  i = i + 1
+
+
+
+if (not fnameoSet):
+  fnameo = "junk_tmp_fixname.txt"
+  fnameoSet = True
+
+numF = len(fnameiList)
+if (numF == 0):
+  print ("Sorry - Must give a file name!")
+  exit(0)
+
+
+for fnamei in fnameiList:
+
+  if (not quietMode):
+    print("Fnamei = %s" % fnamei)
+    print("Fnameo = %s" % fnameo)
+
+  if (fnamei[-4:] != '.asc'):
+    print("Error - Only works with .asc files (%s)" % fnamei)
+    exit(1)
+
+  fnameb = fnamei.split('/')[-1][0:-4]
+
+  fpi = open(fnamei, 'r')
+
+  if (os.path.isfile(fnameo)):
+    os.remove(fnameo)
+
+  fpo = open(fnameo, 'w')
+
+  readDone = False
+  inSymbol = False
+  nameSym  = 'NA'
+
+
+  ZERO_Count = 0
+  UPRT_Count = 0;
+
+  grphSet   = False
+  grphMaxX  = 100
+  grphMinY  = -100
+
+  titleSet = False
+
+
+  changed = False
+  old_fnameb = "NOT FOUND"
+
+  while (not readDone):
+
+    rec = fpi.readline()
+
+    if (not rec):
+        readDone = True
+        continue
+
+    reco = rec.strip()
+    recList = reco.split()
+
+    writeFlag = True
+
+    if (recList[0] == 'SYMBOL'):
+      inSymbol = True
+      nameSym = recList[1]
+      xlocSym = recList[2]
+      ylocSym = recList[3]
+      rrotSym = recList[4]
+
+      xlocNum = int(xlocSym)
+      ylocNum = int(ylocSym)
+
+
+
+      # **********************************      
+      # *** BD_ZERO **********************      
+      # **********************************      
+      if (nameSym == 'BD_ZERO'):
+         if (not grphSet):
+           grphSet = True
+           grphMaxX = xlocNum
+           grphMinY = ylocNum
+
+         else:
+           if (xlocNum > grphMaxX):
+             grphMaxX = xlocNum
+           if (ylocNum < grphMinY):
+             grphMinY = ylocNum
+
+         ZERO_Count += 1
+         writeFlag  = False
+      # **********************************      
+
+
+      # **********************************      
+      # *** BD_UPRT **********************      
+      # **********************************      
+      if (nameSym == 'BD_UPRT'):
+         if (not grphSet):
+           grphSet = True
+           grphMaxX = xlocNum
+           grphMinY = ylocNum
+
+         else:
+           if (xlocNum > grphMaxX):
+             grphMaxX = xlocNum
+           if (ylocNum < grphMinY):
+             grphMinY = ylocNum
+
+         UPRT_Count += 1
+         writeFlag  = False
+      # **********************************      
+
+
+      # **********************************      
+      # *** BD_H10 ***********************      
+      # **********************************      
+      if (nameSym == 'BD_H10'):
+         if (not grphSet):
+           grphSet = True
+           grphMaxX = xlocNum
+           grphMinY = ylocNum
+
+         else:
+           if (xlocNum > grphMaxX):
+             grphMaxX = xlocNum
+           if (ylocNum < grphMinY):
+             grphMinY = ylocNum
+
+         writeFlag  = False
+      # **********************************      
+
+
+    elif (inSymbol and (nameSym == 'BD_GTitleLTS') and (recList[0] == 'SYMATTR') and (recList[1] == 'SpiceModel')):
+      titleSet = True
+      titleX = xlocNum
+      titleY = ylocNum
+      if (fnameb != recList[2]):
+        changed = True
+        old_fnameb = recList[2]
+        reco = "SYMATTR SpiceModel %s" % fnameb
+
+    elif ( (recList[0] == 'SYMATTR') and ( (nameSym == 'BD_ZERO') or (nameSym == 'BD_UPRT') or (nameSym == 'BD_H10') ) ):
+      writeFlag = False
+
+    if (writeFlag):
+      fpo.write("%s\n" % reco)
+
+  if (grphMaxX < 100):
+    grphMaxX = 100
+
+  if (grphMinY > -100):
+    grphMinY = -100
+
+  fpo.write("SYMBOL BD_ZERO %d %d R0\n" % (0, 0))
+  fpo.write("SYMATTR InstName XLTS_ZERO\n")
+
+  fpo.write("SYMBOL BD_UPRT %d %d R0\n" % (grphMaxX, grphMinY))
+  fpo.write("SYMATTR InstName XLTS_UPRT\n")
+
+  fpo.close()
+  fpi.close()
+
+  mresult = filecmp.cmp(fnamei, fnameo)
+
+  if (not quietMode):
+    print("mresult : %s" % str(mresult))
+    if (changed):
+      print("renamed %s --> %s\n" % (old_fnameb, fnameb))
+
+    if (ZERO_Count == 0):
+      print("added ZERO")
+    if (ZERO_Count > 1):
+      print("multiple ZERO were found")
+
+    if (UPRT_Count == 0):
+      print("added UPRT")
+    if (ZERO_Count > 1):
+      print("multiple UPRT were found")
+
+    if (not titleSet):
+      print("FORMAT_ERROR : %s --> no Title" % fnameb)
+
+    if (titleSet and ((titleX != 0) or (titleY != 0))):
+      print("FORMAT_ERROR : %s --> Title not at (0,0)" % fnameb)
+
+
+  if (linuxMode):
+    fnamei_mode = os.stat(fnamei).st_mode & 0o777
+    fnameo_mode = os.stat(fnameo).st_mode & 0o777
+
+    if (not quietMode):
+      print("Permissions (%s) : %s" % (fnamei, str(oct(os.stat(fnamei).st_mode & 0o777))))
+      print("  A. Permissions (%s) : %s" % (fnameo, str(oct(os.stat(fnameo).st_mode & 0o777))))
+
+    if (fnamei_mode != fnameo_mode):
+      os.chmod(fnameo, fnamei_mode)
+
+    if (not quietMode):
+      print("  B. Permissions (%s) : %s" % (fnameo, str(oct(os.stat(fnameo).st_mode & 0o777))))
+  
+
+  if (mresult):
+
+    if (not quietMode):
+      print("No Change")
+
+    if (not keepMode):
+      os.remove(fnameo)
+
+  else:
+
+    if (not quietMode):
+      print("Changes Made %s --> %s" % (fnameo, fnamei))
+
+    if (not copyMode):
+
+      os.remove(fnamei)
+
+      if (keepMode):
+        shutil.copy(fnameo, fnamei)
+
+      else:
+        os.rename(fnameo, fnamei)
+
+
+

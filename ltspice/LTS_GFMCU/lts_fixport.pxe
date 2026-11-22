@@ -1,0 +1,433 @@
+#!/usr/bin/env python3
+
+# rev 2.1 - 10/31/2023 - using python3
+
+# ########################################################################
+# This program renumbers the pins on LTSpice symbol (.asy) files
+#   1. First gets all the coordinates of the pins
+#   2. It also gathers the coordinates of all the LINE and RECTANGLE graphics (note CIRCLE and ARC)
+#   3. If the LINE and RECTANLE data covers an area (dx >= 32) and (dy >=32) then it uses this to decide if pins are on edges
+#   4. If there is not sufficient graphic LINE and RECTANCE data, then it uses another algo to decide if pins are on edges
+#   5. The goals in to number pins :
+#      * right side top to bottom
+#      * left  side top to bottom
+#      * top   side right to left
+#      * bottom side right to left
+#      * interior pins sort by xval left to right
+#                      then by yval top  to bottom
+#        (single pins on top or bottom are considered interior)
+#   7. Not y-values in LTSpice are decreasing in the up direction
+# ########################################################################
+
+import sys
+import math
+import time
+import os
+
+total = len(sys.argv)
+
+cmdargs = str(sys.argv)
+
+# ##################################################################
+DEBUG = False
+if (DEBUG):
+  print("The total numbers of args passed to the script: %d " % total)
+  print("Args list: %s " % cmdargs)
+  print("Script name: %s" % str(sys.argv[0]))
+  for i in range(total):
+      print("Argument # %d : %s" % (i, str(sys.argv[i])))
+  print("Leaving")
+# ##################################################################
+
+def skeyFunc(itm):
+  global xmin
+  global xmax
+  global ymin
+  global ymax
+
+  global rgtSideFlag
+  global lftSideFlag
+  global botSideFlag
+  global topSideFlag
+
+  global cmp0g
+  global cmp1g
+  global cmp2g
+  global cmp3g
+  global cmp4g
+  global cmp5g
+
+  cmp0 = -1   # rgt side
+  cmp1 = -1   # lft side
+  cmp2 = -1   # bot side
+  cmp3 = -1   # top side
+  cmp4 = -1   # inn xdst
+  cmp5 = -1   # inn ydst
+
+  pnam = itm[0]
+  xval = itm[1]
+  yval = itm[2]
+
+  if   (rgtSideFlag and (xval == xmax)):
+    cmp0 = (ymax - yval)
+  elif (lftSideFlag and (xval == xmin)):
+    cmp1 = (ymax - yval)
+  elif (botSideFlag and (yval == ymax)):
+    cmp2 = (xmax - xval)
+  elif (topSideFlag and (yval == ymin)):
+    cmp3 = (xmax - xval)
+  else:
+    cmp4 = (xmax - xval)
+    cmp5 = (ymax - yval)
+
+  (cmp0g, cmp1g, cmp2g, cmp3g, cmp4g, cmp5g) = (cmp0, cmp1, cmp2, cmp3, cmp4, cmp5)
+
+  return((cmp0, cmp1, cmp2, cmp3, cmp4, cmp5))
+
+
+fnameiList = []
+
+fnameoSet = False
+
+doSubst = False
+copyMode = False
+quietMode = False
+linuxMode = False
+
+i = 1
+
+while (i < total):
+
+  name = str(sys.argv[i])
+
+  if (name[0] == '-'):
+
+    if   (name[1:] == 'o'):
+      i = i + 1
+      fnameo = str(sys.argv[i])
+      fnameoSet = True
+
+    elif (name[1:] == 'copy'):
+      copyMode = True
+
+    elif (name[1:] == 'quiet'):
+      quietMode = True
+
+    elif (name[1:] == 'linux'):
+      linuxMode = True
+
+    elif (name[1:] == 'h') or (name[1:] == '-h') or (name[1:] == 'help') or (name[1:] == '-help'):
+      print("Usage : fixport_lts.pxe file1 file2 file3 ... [-quiet] [-o temp_file] [-copy] [-linux]")
+      print("      : (will overwrite input file unless you use -copy)")
+      print("      : lts_fixport.pxe *.asy | grep Made")
+      exit(1)
+
+    else:
+      print("Sorry - unknown -key (%s)" % name)
+      exit(0)
+
+  else:
+
+    if (os.path.isfile(name)):
+      fnameiList.append(name)
+
+    elif (os.path.isdir(name)):
+      print ("warning - ignoring directory (%s)" % name)
+
+    else:
+      print ("Sorry - unknown arg (%s)" % name)
+      exit(0)
+
+  i = i + 1
+
+
+
+if (not fnameoSet):
+  fnameo = "junk_tmp_fixname.txt"
+  fnameoSet = True
+
+numF = len(fnameiList)
+if (numF == 0):
+  print ("Sorry - Must give a file name!")
+  exit(0)
+
+
+# * ********************************************************************************
+# * Go thru each input file and create a pinList, and calculate a new order
+# * Set Globals : xmin, xmax, ymin, ymax, rgtSideFlag, lftSideFlag, botSideFlag, topSideFlag
+# * If changes were made, update file
+# * (note if lines and rectangles are used, these are used to decide which edge pins are on)
+# * ********************************************************************************
+for fnamei in fnameiList:
+
+  # * ********************************************************************************
+  # * Read through input file
+  # * ********************************************************************************
+  if (not quietMode):
+    print("Fnamei = %s" % fnamei)
+    print("Fnameo = %s" % fnameo)
+
+  if (fnamei[-4:] != '.asy'):
+    print("Error - Only works with .asy files (%s)" % fnamei)
+    exit(1)
+
+  fpi = open(fnamei, 'r')
+
+  readDone = False
+  inPin = False
+  pnamSet = False
+  pnumSet = False
+
+  pinList = []
+  xvalList = []
+  yvalList = []
+
+  grphXList = []
+  grphYList = []
+  grphUsed = False
+  grphFlag = False
+
+  while (not readDone):
+
+    rec = fpi.readline()
+
+    if (not rec):
+      readDone = True
+    else:
+      reco = rec.strip()
+      recList = reco.split()
+
+    if (recList[0] == 'LINE') or (recList[1] == 'RECTANGLE'):
+      xx1 = int(recList[2])
+      yy1 = int(recList[3])
+      xx2 = int(recList[4])
+      yy2 = int(recList[5])
+
+      dx = abs(xx2 - xx1)
+      dy = abs(yy2 - yy1)
+
+      if ((dx >= 32) or (dy >= 32)):
+        grphUsed = True
+        grphXList.append(xx1)
+        grphXList.append(xx2)
+        grphYList.append(yy1)
+        grphYList.append(yy2)
+
+
+    if (inPin and (readDone or (recList[0] != 'PINATTR'))):
+      if (not pnamSet):
+        print("Error - missing PinName")
+        exit(1)
+      if (not pnumSet):
+        print("Error - missing SpiceOrder")
+        exit(1)
+      pinList.append((pnam, xval, yval, justStr, justOff, pnum))
+
+      xvalList.append(xval)
+      yvalList.append(yval)
+
+      inPin = False
+      pnamSet = False
+      pnumSet = False
+
+    if (readDone):
+      continue
+
+    if (recList[0] == 'PIN'):
+      inPin = True
+      xval = int(recList[1])
+      yval = int(recList[2])
+      justStr = recList[3]
+      justOff = int(recList[4])
+    elif ((recList[0] == 'PINATTR') and (recList[1] == 'PinName')):
+      pnamSet = True
+      pnam = recList[2]
+    elif ((recList[0] == 'PINATTR') and (recList[1] == 'SpiceOrder')):
+      pnumSet = True
+      pnum = int(recList[2])
+
+  fpi.close();
+  # * ********************************************************************************
+
+  # * ********************************************************************************
+  # * Skip if no pins are used
+  # * ********************************************************************************
+  if (len(pinList) == 0):
+    print("Skipping %s - no pins" % fnamei)
+    continue
+  # * ********************************************************************************
+
+  # * ********************************************************************************
+  # * Set grphFlag if reasonable sizes of LINEs and RECTANGLEs
+  # * ********************************************************************************
+  if (grphUsed):
+    grphXmin = min(grphXList)
+    grphXmax = max(grphXList)
+    grphYmin = min(grphYList)
+    grphYmax = max(grphYList)
+    if (((grphXmax - grphXmin) >= 32) and ((grphYmax - grphYmin) >= 32)):
+      grphFlag = True
+
+  if (not grphFlag):
+    print("Warning - Ignoring Graphics")
+  # * ********************************************************************************
+
+  xmin = min(xvalList)
+  xmax = max(xvalList)
+  ymin = min(yvalList)
+  ymax = max(yvalList)
+
+  if (grphFlag):
+    rgtSideFlag = (xmax >= grphXmax)
+    lftSideFlag = (xmin <= grphXmin)
+    botSideFlag = (ymax >= grphYmax)
+    topSideFlag = (ymin <= grphYmin)
+  else:
+    rgtSideFlag = (xvalList.count(xmax) >= 1)
+    lftSideFlag = (xvalList.count(xmin) >= 1)
+    botSideFlag = (yvalList.count(ymax) > 1)
+    topSideFlag = (yvalList.count(ymin) > 1)
+
+  # * ********************************************************************************
+  # * Print the pinList for debug
+  # * ********************************************************************************
+  if (not quietMode):
+    print("* ***************************************")
+    print("%d %d %d %d" % (xmin, xmax, ymin, ymax))
+    print("GRPH=", grphFlag, " (rgt, lft, bot, top) : ", rgtSideFlag, lftSideFlag, botSideFlag, topSideFlag)
+    print("* ***************************************")
+    for item in pinList:
+      print(item, end=" : ")
+      print(skeyFunc(item), end=" : ")
+      print(cmp0g, cmp1g, cmp2g, cmp3g, cmp4g, cmp5g)
+    print("* ***************************************")
+  # * ********************************************************************************
+
+  # * ********************************************************************************
+  # * Create the pin number dictionaries
+  # * ********************************************************************************
+  pinList.sort(key = skeyFunc, reverse = True)
+  pnumDict = {}
+  pnumDictXY = {}
+  pdx = 1
+  changed = False
+  for item in pinList:
+    if (not quietMode):
+      print(item)
+    pnam = item[0]
+    xloc = item[1]
+    yloc = item[2]
+    pnumDict[pnam] = pdx
+    pnumDictXY[(xloc, yloc)] = pdx
+
+    if (pdx != item[5]):
+      changed = True
+
+    pdx += 1
+
+  if (not quietMode):
+    print("* ***************************************")
+    print(pnumDict)
+    print(pnumDictXY)
+
+    print("* ***************************************")
+    print("")
+  # * ********************************************************************************
+
+
+  # * ********************************************************************************
+  # * Check if changes were made, and continue otherwise
+  # * ********************************************************************************
+  if (changed):
+    print("%s : Changes Made" % fnamei)
+  else:
+    print("%s : No changes Needed" % fnamei)
+    continue
+  # * ********************************************************************************
+
+
+  # * ********************************************************************************
+  # * Create the modified symbol file
+  # * ********************************************************************************
+  fpi = open(fnamei, 'r')
+  fpo = open(fnameo, 'w')
+
+  readDone = False
+  inPin = False
+  pnamSet = False
+  pnumSet = False
+
+  pinList = []
+  xvalList = []
+  yvalList = []
+
+  grphXList = []
+  grphYList = []
+  grphUsed = False
+  grphFlag = False
+
+  while (not readDone):
+
+    rec = fpi.readline()
+
+    if (not rec):
+      readDone = True
+    else:
+      reco = rec.strip()
+      recList = reco.split()
+
+    if (readDone):
+      continue
+
+    if (recList[0] == 'PIN'):
+      xloc = int(recList[1])
+      yloc = int(recList[2])
+
+    if ((recList[0] == 'PINATTR') and (recList[1] == 'SpiceOrder')):
+      pnum = pnumDictXY[(xloc, yloc)]
+      fpo.write("PINATTR SpiceOrder %d\n" % pnum)
+    else:
+      fpo.write("%s\n" % reco)
+
+
+  fpo.close();
+  fpi.close();
+  # * ********************************************************************************
+
+
+  # * ********************************************************************************
+  # * Change permissions to match original file
+  # * ********************************************************************************
+  if (linuxMode):
+    fnamei_mode = os.stat(fnamei).st_mode & 0o777
+    fnameo_mode = os.stat(fnameo).st_mode & 0o777
+
+    if (not quietMode):
+      print("Permissions (%s) : %s" % (fnamei, str(oct(os.stat(fnamei).st_mode & 0o777))))
+      print("  A. Permissions (%s) : %s" % (fnameo, str(oct(os.stat(fnameo).st_mode & 0o777))))
+
+    if (fnamei_mode != fnameo_mode):
+      os.chmod(fnameo, fnamei_mode)
+
+    if (not quietMode):
+      print("  B. Permissions (%s) : %s" % (fnameo, str(oct(os.stat(fnameo).st_mode & 0o777))))
+  # * ********************************************************************************
+
+
+  # * ********************************************************************************
+  # * Overwrite the orignal file
+  # * ********************************************************************************
+  if (not copyMode):
+    os.remove(fnamei)
+    os.rename(fnameo, fnamei)
+  # * ********************************************************************************
+
+
+
+
+
+
+
+
+
+

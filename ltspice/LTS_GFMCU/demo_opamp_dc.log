@@ -1,0 +1,38 @@
+LTspice 26.0.1 for Windows
+Circuit: D:\LTSpice\LTS_GFMCU\demo_opamp_dc.net
+Start Time: Sat Nov 21 21:52:32 2026
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Warning: LTspice uses BSIM4 version 4.6.1. Your model specified an unrecognized version number: 4.50000000e+00
+Direct Newton iteration failed to find operating point.
+Starting Gmin stepping
+Gmin stepping succeeded in finding the operating point.
+
+Total elapsed time: 0.272 seconds.
+
+Files loaded:
+D:\LTSpice\LTS_GFMCU\demo_opamp_dc.net
+D:\LTSpice\models_gfmcu.lib
+
