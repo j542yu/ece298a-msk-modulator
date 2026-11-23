@@ -437,9 +437,9 @@ MACRO tt_um_ece298a_msk_modulator
   END VDPWR
   OBS
       LAYER Nwell ;
-        RECT 62.805 195.000 335.040 316.010 ;
+        RECT 62.805 192.950 337.800 316.010 ;
       LAYER Metal1 ;
-        RECT 60.800 190.400 334.610 320.050 ;
+        RECT 60.800 190.400 337.800 320.050 ;
       LAYER Metal2 ;
         RECT 63.800 0.000 332.790 320.050 ;
       LAYER Metal3 ;

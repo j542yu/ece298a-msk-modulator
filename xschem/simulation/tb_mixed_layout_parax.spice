@@ -1,0 +1,37 @@
+** sch_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tb_mixed_layout_parax.sch
+**.subckt tb_mixed_layout_parax data_in enable clk rst_n dac_parax_out
+*.ipin data_in
+*.ipin enable
+*.ipin clk
+*.ipin rst_n
+*.opin dac_parax_out
+V1 net1 GND 3.3
+x1 clk net1 rst_n dac_parax_out GND GND GND GND GND GND GND data_in enable GND GND GND GND GND GND
++ GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND
++ GND GND GND GND GND GND net1 tt_um_ece298a_msk_modulator_parax
+**** begin user architecture code
+
+.option wnflag=1
+
+.control
+    tran 5n 850ns
+    write tb_mixed_layout_parax.raw
+.endc
+
+
+
+.include ./stimuli/modulator_5_3_stimuli.spice
+
+
+.include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  tt_um_ece298a_msk_modulator_parax.sym # of pins=52
+** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_ece298a_msk_modulator_parax.sym
+.include ../../mag/spice/tt_um_ece298a_msk_modulator_parax.spice
+.GLOBAL GND
+.end
