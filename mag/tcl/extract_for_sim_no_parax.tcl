@@ -16,4 +16,4 @@ extract all
 
 # Export to NGSpice format
 ext2spice lvs
-ext2spice -o ${project}_no_parax.spice
+ext2spice -o ./spice/${project}_no_parax.spice

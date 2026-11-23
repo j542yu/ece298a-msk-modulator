@@ -1,26 +1,25 @@
 magic
 tech gf180mcuD
 magscale 1 10
-timestamp 1795318736
+timestamp 1795399624
 << metal1 >>
-rect 120 4611 2889 4690
-rect 120 4610 1951 4611
-rect 120 4390 494 4610
-rect 599 4471 2430 4551
-rect 599 4417 973 4471
-rect 588 4371 984 4417
-rect 1079 4371 1933 4417
-rect 2020 4370 2430 4471
-rect 2521 4391 2889 4611
+rect 120 8614 2889 8693
+rect 120 8613 1951 8614
+rect 120 8393 494 8613
+rect 599 8474 2430 8554
+rect 599 8374 973 8474
+rect 1079 8374 1933 8420
+rect 2020 8373 2430 8474
+rect 2521 8394 2889 8614
 rect 2520 245 2900 246
 rect 127 199 1464 245
 rect 2039 200 2900 245
 rect 2039 199 2889 200
 rect 1559 -101 1933 199
-use ppolyf_u_1k_RUZ9QZ  ppolyf_u_1k_RUZ9QZ_0
-timestamp 1795318736
-transform 1 0 1506 0 1 2308
-box -1400 -2122 1400 2122
+use ppolyf_u_1k_932AWZ  ppolyf_u_1k_932AWZ_0
+timestamp 1795399624
+transform 1 0 1506 0 1 4308
+box -1400 -4122 1400 4122
 << labels >>
 flabel metal1 1559 -101 1933 199 0 FreeSans 1600 0 0 0 in
 port 2 nsew
@@ -28,7 +27,7 @@ flabel metal1 2039 199 2889 245 0 FreeSans 800 0 0 0 R_node_out
 port 3 nsew
 flabel metal1 127 199 1464 245 0 FreeSans 800 0 0 0 R_node_in
 port 1 nsew
-flabel metal1 1079 4371 1933 4417 0 FreeSans 800 0 0 0 net1
-flabel metal1 599 4471 2430 4551 0 FreeSans 800 0 0 0 net2
-flabel metal1 120 4611 2889 4690 0 FreeSans 800 0 0 0 net3
+flabel metal1 120 8614 2889 8693 0 FreeSans 800 0 0 0 net3
+flabel metal1 599 8474 2430 8554 0 FreeSans 800 0 0 0 net2
+flabel metal1 1079 8374 1933 8420 0 FreeSans 800 0 0 0 net1
 << end >>

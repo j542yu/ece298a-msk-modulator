@@ -15,4 +15,4 @@ ext2spice lvs
 ext2spice cthresh 0
 ext2spice extresist on
 
-ext2spice -o ${project}_parax.spice
+ext2spice -o ./spice/${project}_parax.spice

@@ -14,7 +14,7 @@ extract all
 ext2spice lvs
 ext2spice cthresh infinite
 ext2spice short resistor
-ext2spice -d -o $project.lvs.spice
+ext2spice -d -o ./spice/$project.lvs.spice
 
 # Save any warnings
 feedback save $project.fb.txt

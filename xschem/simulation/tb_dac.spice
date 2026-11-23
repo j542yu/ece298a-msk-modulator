@@ -32,7 +32,7 @@ x1 DAC_SCH_OUT B_5_3[4] B_5_3[3] B_5_3[2] B_5_3[1] B_5_3[0] T_5_3[6] T_5_3[5] T_
 
 
 
-.include dac_ramp_sampling-50.0MHz_3.3V_5_3.spice
+.include stimuli/dac_ramp_sampling-50.0MHz_3.3V_5_3.spice
 
 
 .include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
@@ -44,7 +44,7 @@ x1 DAC_SCH_OUT B_5_3[4] B_5_3[3] B_5_3[2] B_5_3[1] B_5_3[0] T_5_3[6] T_5_3[5] T_
 
 * expanding   symbol:  dac_5_3_parax.sym # of pins=14
 ** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/dac_5_3_parax.sym
-.include ../../mag/dac_5_3.sim.spice
+.include ../../mag/spice/dac_5_3_parax.spice
 
 * expanding   symbol:  dac_5_3.sym # of pins=4
 ** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/dac_5_3.sym
@@ -78,11 +78,11 @@ x12 DAC_OUT T[6] VGND dac_sub_therm
 * tap: T[6:0] --> T[4]
 * tap: T[6:0] --> T[5]
 * tap: T[6:0] --> T[6]
-XR2 VGND net6 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR3 net6 net1 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR4 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR5 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR7 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
+XR2 VGND net6 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR3 net6 net1 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR4 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR5 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR7 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
 .ends
 
 
@@ -94,12 +94,12 @@ XR7 VGND VGND VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
 *.iopin R_node_out
 *.iopin R_node_in
 *.iopin VGND
-XR7 in net1 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR1 net1 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR2 net2 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR3 R_node_out net2 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR4 net3 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR5 R_node_out net3 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
+XR7 in net1 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR1 net1 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR2 net2 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR3 R_node_out net2 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR4 net3 R_node_in VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR5 R_node_out net3 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
 .ends
 
 
@@ -110,8 +110,8 @@ XR5 R_node_out net3 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
 *.ipin in
 *.iopin R_node
 *.iopin VGND
-XR7 in net1 VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
-XR1 net1 R_node VGND ppolyf_u_1k r_width=2e-6 r_length=20e-6 m=1
+XR7 in net1 VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
+XR1 net1 R_node VGND ppolyf_u_1k r_width=2e-6 r_length=40e-6 m=1
 .ends
 
 .GLOBAL GND

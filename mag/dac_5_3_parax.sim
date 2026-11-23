@@ -1,0 +1,173 @@
+| units: 0.5 tech: gf180mcuD format: MIT
+x a_7166_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net1 B[2] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=7166 y=528 ppolyf_u_1k
+x a_7646_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net2 2R_21,2R22,2R_31,2R_32,2R_3 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=7646 y=528 ppolyf_u_1k
+x a_10046_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net1 B[3] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=10046 y=528 ppolyf_u_1k
+x a_19166_528# a_19166_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=19166 y=528 ppolyf_u_1k
+x a_10526_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net2 2R_31,2R_32,2R_41,2R_42,2R_4 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=10526 y=528 ppolyf_u_1k
+x a_19646_528# a_19646_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=19646 y=528 ppolyf_u_1k
+x a_1406_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net1 B[0] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=1406 y=528 ppolyf_u_1k
+x a_13406_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net2 DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=13406 y=528 ppolyf_u_1k
+x a_20126_528# a_19646_8528# T[4] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=20126 y=528 ppolyf_u_1k
+x a_20606_528# a_19166_8528# T[5] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=20606 y=528 ppolyf_u_1k
+x a_6686_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net1 2R_11,2R_12,2R_21,2R_22,2R_2 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=6686 y=528 ppolyf_u_1k
+x a_9086_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net2 2R_21,2R22,2R_31,2R_32,2R_3 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=9086 y=528 ppolyf_u_1k
+x a_18686_528# a_18686_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=18686 y=528 ppolyf_u_1k
+x a_9566_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net1 2R_21,2R22,2R_31,2R_32,2R_3 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=9566 y=528 ppolyf_u_1k
+x a_3326_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net2 2R_01,2R_02,2R_11,2R_12,2R_1 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=3326 y=528 ppolyf_u_1k
+x a_12446_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net1 2R_31,2R_32,2R_41,2R_42,2R_4 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=12446 y=528 ppolyf_u_1k
+x a_12926_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net1 B[4] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=12926 y=528 ppolyf_u_1k
+x a_3806_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net1 2R_01,2R_02,2R_11,2R_12,2R_1 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=3806 y=528 ppolyf_u_1k
+x a_15326_528# a_15326_8528# T[1] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=15326 y=528 ppolyf_u_1k
+x a_6206_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net2 2R_11,2R_12,2R_21,2R_22,2R_2 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=6206 y=528 ppolyf_u_1k
+x a_15806_528# a_15806_8528# T[2] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=15806 y=528 ppolyf_u_1k
+x a_18206_528# a_14846_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=18206 y=528 ppolyf_u_1k
+x a_2366_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net3 2R_01,2R_02,2R_11,2R_12,2R_1 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=2366 y=528 ppolyf_u_1k
+x a_11486_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net3 2R_31,2R_32,2R_41,2R_42,2R_4 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=11486 y=528 ppolyf_u_1k
+x a_11966_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net2 2R_31,2R_32,2R_41,2R_42,2R_4 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=11966 y=528 ppolyf_u_1k
+x a_2846_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net3 2R_01,2R_02,2R_11,2R_12,2R_1 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=2846 y=528 ppolyf_u_1k
+x a_n1474_528# VGND VGND VGND s=48800,1044 l=8000 w=400 x=-1473 y=528 ppolyf_u_1k
+x a_14366_528# VGND VGND VGND s=48800,1044 l=8000 w=400 x=14366 y=528 ppolyf_u_1k
+x a_5246_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net3 2R_11,2R_12,2R_21,2R_22,2R_2 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=5246 y=528 ppolyf_u_1k
+x a_14846_528# a_14846_8528# T[0] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=14846 y=528 ppolyf_u_1k
+x a_21086_528# a_18686_8528# T[6] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=21086 y=528 ppolyf_u_1k
+x a_21566_528# VGND VGND VGND s=48800,1044 l=8000 w=400 x=21566 y=528 ppolyf_u_1k
+x a_n994_528# 2R_0G,2R_0G VGND VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=-993 y=528 ppolyf_u_1k
+x a_5726_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net3 2R_11,2R_12,2R_21,2R_22,2R_2 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=5726 y=528 ppolyf_u_1k
+x a_17246_528# a_15806_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=17246 y=528 ppolyf_u_1k
+x a_17726_528# a_15326_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=17726 y=528 ppolyf_u_1k
+x a_n34_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net3 2R_0G,2R_01,2R_02,2R_0 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=-33 y=528 ppolyf_u_1k
+x a_8126_528# dac_r2r_5_bits_0/dac_sub_r2r_2.net3 2R_21,2R22,2R_31,2R_32,2R_3 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=8126 y=528 ppolyf_u_1k
+x a_8606_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net3 2R_21,2R22,2R_31,2R_32,2R_3 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=8606 y=528 ppolyf_u_1k
+x a_11006_528# dac_r2r_5_bits_0/dac_sub_r2r_3.net3 2R_31,2R_32,2R_41,2R_42,2R_4 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=11006 y=528 ppolyf_u_1k
+x a_1886_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net2 2R_01,2R_02,2R_11,2R_12,2R_1 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=1886 y=528 ppolyf_u_1k
+x a_4286_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net1 B[1] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=4286 y=528 ppolyf_u_1k
+x a_13886_528# dac_r2r_5_bits_0/dac_sub_r2r_4.net3 DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=13886 y=528 ppolyf_u_1k
+x a_4766_528# dac_r2r_5_bits_0/dac_sub_r2r_1.net2 2R_11,2R_12,2R_21,2R_22,2R_2 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=4766 y=528 ppolyf_u_1k
+x a_n514_528# 2R_0G,2R_0G 2R_0G,2R_01,2R_02,2R_0 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=-513 y=528 ppolyf_u_1k
+x a_446_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net2 2R_0G,2R_01,2R_02,2R_0 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=446 y=528 ppolyf_u_1k
+x a_926_528# dac_r2r_5_bits_0/dac_sub_r2r_0.net1 2R_0G,2R_01,2R_02,2R_0 VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=926 y=528 ppolyf_u_1k
+x a_16286_528# a_16286_8528# T[3] VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=16286 y=528 ppolyf_u_1k
+x a_16766_528# a_16286_8528# DAC_OUT VGND s=48800,1044 d=48800,1044 l=8000 w=400 x=16766 y=528 ppolyf_u_1k
+R T[6] 25
+= T[6] dac_therm_3_bits_0/dac_sub_therm1_0.T[6]
+R T[5] 25
+= T[5] dac_therm_3_bits_0/dac_sub_therm1_0.T[5]
+R T[4] 25
+= T[4] dac_therm_3_bits_0/dac_sub_therm1_0.T[4]
+R T[3] 25
+= T[3] dac_therm_3_bits_0/dac_sub_therm2_0.T[3]
+R T[2] 25
+= T[2] dac_therm_3_bits_0/dac_sub_therm2_0.T[2]
+R T[1] 25
+= T[1] dac_therm_3_bits_0/dac_sub_therm2_0.T[1]
+R T[0] 25
+= T[0] dac_therm_3_bits_0/dac_sub_therm2_0.T[0]
+C DAC_OUT0 8.0
+R DAC_OUT 356
+= DAC_OUT dac_r2r_5_bits_0/dac_sub_r2r_4.R_node_out
+= DAC_OUT dac_therm_3_bits_0/dac_sub_therm1_0.DAC_5_3_OUT
+= DAC_OUT dac_therm_3_bits_0/dac_sub_therm2_0.DAC_5_3_OUT
+R B[4] 25
+= B[4] dac_r2r_5_bits_0/dac_sub_r2r_4.in
+R B[3] 25
+= B[3] dac_r2r_5_bits_0/dac_sub_r2r_3.in
+R B[2] 25
+= B[2] dac_r2r_5_bits_0/dac_sub_r2r_2.in
+R B[1] 25
+= B[1] dac_r2r_5_bits_0/dac_sub_r2r_1.in
+R B[0] 25
+= B[0] dac_r2r_5_bits_0/dac_sub_r2r_0.in
+R VGND 6569
+R a_21566_528# 20000
+R a_21086_528# 20000
+R a_20606_528# 20000
+R a_20126_528# 20000
+R a_19646_528# 20000
+R a_19646_8528# 68
+R a_19166_528# 20000
+R a_19166_8528# 68
+R a_18686_528# 20000
+C a_18686_8528#0 2.1
+R a_18686_8528# 68
+R a_18206_528# 20000
+R a_17726_528# 20000
+R a_17246_528# 20000
+R a_16766_528# 20000
+R a_16286_528# 20000
+R a_16286_8528# 68
+R a_15806_528# 20000
+R a_15806_8528# 67
+R a_15326_528# 20000
+R a_15326_8528# 68
+R a_14846_528# 20000
+C a_14846_8528#0 2.7
+R a_14846_8528# 69
+R a_14366_528# 20000
+R a_13886_528# 20000
+R a_13406_528# 20000
+R a_12926_528# 20000
+R a_12446_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_4.net1 68
+R a_11966_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_4.net2 68
+R a_11486_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_4.net3 68
+R a_11006_528# 20000
+C 2R_31,2R_32,2R_41,2R_42,2R_40 2.7
+R 2R_31,2R_32,2R_41,2R_42,2R_4 193
+= 2R_31,2R_32,2R_41,2R_42,2R_4 dac_r2r_5_bits_0/dac_sub_r2r_3.R_node_out
+= 2R_31,2R_32,2R_41,2R_42,2R_4 dac_r2r_5_bits_0/dac_sub_r2r_4.R_node_in
+R a_10526_528# 20000
+R a_10046_528# 20000
+R a_9566_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_3.net1 68
+R a_9086_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_3.net2 68
+R a_8606_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_3.net3 68
+R a_8126_528# 20000
+C 2R_21,2R22,2R_31,2R_32,2R_30 2.8
+R 2R_21,2R22,2R_31,2R_32,2R_3 193
+= 2R_21,2R22,2R_31,2R_32,2R_3 dac_r2r_5_bits_0/dac_sub_r2r_2.R_node_out
+= 2R_21,2R22,2R_31,2R_32,2R_3 dac_r2r_5_bits_0/dac_sub_r2r_3.R_node_in
+R a_7646_528# 20000
+R a_7166_528# 20000
+R a_6686_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_2.net1 68
+R a_6206_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_2.net2 68
+R a_5726_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_2.net3 68
+R a_5246_528# 20000
+C 2R_11,2R_12,2R_21,2R_22,2R_20 2.7
+R 2R_11,2R_12,2R_21,2R_22,2R_2 193
+= 2R_11,2R_12,2R_21,2R_22,2R_2 dac_r2r_5_bits_0/dac_sub_r2r_1.R_node_out
+= 2R_11,2R_12,2R_21,2R_22,2R_2 dac_r2r_5_bits_0/dac_sub_r2r_2.R_node_in
+R a_4766_528# 20000
+R a_4286_528# 20000
+R a_3806_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_1.net1 68
+R a_3326_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_1.net2 68
+R a_2846_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_1.net3 68
+R a_2366_528# 20000
+C 2R_01,2R_02,2R_11,2R_12,2R_10 2.7
+R 2R_01,2R_02,2R_11,2R_12,2R_1 193
+= 2R_01,2R_02,2R_11,2R_12,2R_1 dac_r2r_5_bits_0/dac_sub_r2r_0.R_node_out
+= 2R_01,2R_02,2R_11,2R_12,2R_1 dac_r2r_5_bits_0/dac_sub_r2r_1.R_node_in
+R a_1886_528# 20000
+R a_1406_528# 20000
+R a_926_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_0.net1 68
+R a_446_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_0.net2 68
+R a_n34_528# 20000
+R dac_r2r_5_bits_0/dac_sub_r2r_0.net3 68
+C 2R_0G,2R_01,2R_02,2R_00 2.2
+R 2R_0G,2R_01,2R_02,2R_0 152
+= 2R_0G,2R_01,2R_02,2R_0 dac_r2r_5_bits_0/dac_sub_r2r_0.R_node_in
+R a_n514_528# 20000
+R a_n994_528# 20000
+R 2R_0G,2R_0G 68
+R a_n1474_528# 20000
