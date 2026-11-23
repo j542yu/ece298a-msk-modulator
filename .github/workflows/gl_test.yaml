@@ -1,4 +1,4 @@
-name: block-gds-and-gl-test
+name: gl-test
 
 on:
   push:
