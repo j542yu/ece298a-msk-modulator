@@ -26,7 +26,7 @@ x1 DAC_SCH_OUT B_5_3[4] B_5_3[3] B_5_3[2] B_5_3[1] B_5_3[0] T_5_3[6] T_5_3[5] T_
 .option wnflag=1
 
 .control
-    tran 10p 7us
+    tran 1n 7us
     write tb_dac.raw
 .endc
 
