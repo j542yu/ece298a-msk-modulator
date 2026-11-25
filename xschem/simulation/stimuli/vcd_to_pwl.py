@@ -80,12 +80,12 @@ if __name__ == "__main__":
     signals = {
         "clk": ("tb.clk", None),
         "rst_n": ("tb.rst_n", None),
-        "in": ("tb.ui_in[7:0]", 0),
-        "enable": ("tb.ui_in[7:0]", 1),
+        "data_in": ("tb.data_in", None),
+        "enable": ("tb.enable", None),
     }
 
     vcd_to_spice(
-        vcd_file="../../test/tb.vcd",
+        vcd_file="../../../verilog/test/tb.vcd",
         signals=signals,
         output_file="modulator_5_3_stimuli.spice",
         vdd=3.3,

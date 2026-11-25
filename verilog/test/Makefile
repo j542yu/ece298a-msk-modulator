@@ -3,7 +3,7 @@
 
 # defaults
 SIM ?= icarus
-FST ?= -fst # Use more efficient FST format
+FST ?=
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../rtl
 PROJECT_SOURCES = modulator.v cos_lut.v

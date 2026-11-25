@@ -102,8 +102,8 @@ async def msk_golden_model_test(dut):
     model.reset()
 
     dut._log.info("Resetting DUT")
-    # Wait 10 samples (arbitrary value)
-    for _ in range(10):
+    # Wait 2 samples (arbitrary value)
+    for _ in range(2):
         await step(dut, model, 0, 0, rst_n=0)
 
     # Release reset, but keep modulator disabled
