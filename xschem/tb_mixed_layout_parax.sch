@@ -6,28 +6,29 @@ V {}
 S {}
 E {}
 B 2 60 -530 860 -130 {flags=graph
-y1=-0.528375
-y2=3.61882
+y1=-1.5108
+y2=6.4292
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=1.28183e-07
-x2=8.88102e-07
+x1=-1.78787e-07
+x2=1.44467e-06
 divx=5
 subdivx=1
 xlabmag=1.0
 ylabmag=1.0
-node="in
+node="data_in
 dac_ideal_out
-dac_parax_out"
-color="3 10 13"
+dac_parax_out
+enable"
+color="3 10 13 4"
 dataset=-1
 unitx=1
 logx=0
 logy=0
-}
+hilight_wave=2}
 N 90 -1490 180 -1490 {
 lab=#net1}
 N 130 -1430 180 -1430 {
@@ -57,17 +58,37 @@ tclcommand="xschem raw_read $netlist_dir/tb_mixed_layout_parax.raw tran"
 C {code_shown.sym} 940 -440 0 0 {name=SIM only_toplevel=false value=".option wnflag=1
 
 .control
-    tran 5n 850ns
+    tran 10n 500ns
     write tb_mixed_layout_parax.raw
 .endc
 "}
 C {code_shown.sym} 940 -270 0 0 {name=STIMULI only_toplevel=false value=".include ./stimuli/modulator_5_3_stimuli.spice"}
-C {code_shown.sym} 940 -540 0 0 {name=CORNER only_toplevel=false value=".include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
-.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
-.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical"}
 C {gnd.sym} 180 -1470 0 1 {name=l2 lab=GND}
 C {opin.sym} 290 -620 0 0 {name=p29 lab=dac_parax_out}
 C {tt_um_ece298a_msk_modulator_parax.sym} 340 -1160 0 0 {}
 C {gnd.sym} 650 -740 0 0 {name=l3 lab=GND}
 C {gnd.sym} 510 -690 0 0 {name=l4 lab=GND}
 C {gnd.sym} 180 -740 0 1 {name=l5 lab=GND}
+C {devices/code_shown.sym} 930 -660 0 0 {name=MODELS only_toplevel=true
+format="tcleval( @value )"
+value="
+.include $::180MCU_MODELS/design.ngspice
+.lib $::180MCU_MODELS/sm141064.ngspice typical
+.lib $::180MCU_MODELS/sm141064.ngspice cap_mim
+.lib $::180MCU_MODELS/sm141064.ngspice res_typical
+.lib $::180MCU_MODELS/sm141064.ngspice moscap_typical
+.lib $::180MCU_MODELS/sm141064.ngspice mimcap_typical
+* .lib $::180MCU_MODELS/sm141064.ngspice res_statistical
+"}
+C {lab_pin.sym} 830 -740 2 0 {name=p5 sig_type=std_logic lab=b0}
+C {lab_pin.sym} 830 -770 2 0 {name=p6 sig_type=std_logic lab=b1}
+C {lab_pin.sym} 830 -800 2 0 {name=p7 sig_type=std_logic lab=b2}
+C {lab_pin.sym} 830 -830 2 0 {name=p8 sig_type=std_logic lab=b3}
+C {lab_pin.sym} 830 -860 2 0 {name=p9 sig_type=std_logic lab=b4}
+C {lab_pin.sym} 830 -890 2 0 {name=p10 sig_type=std_logic lab=t0}
+C {lab_pin.sym} 830 -920 2 0 {name=p11 sig_type=std_logic lab=t1}
+C {lab_pin.sym} 830 -950 2 0 {name=p12 sig_type=std_logic lab=t2}
+C {lab_pin.sym} 830 -980 2 0 {name=p13 sig_type=std_logic lab=t3}
+C {lab_pin.sym} 830 -1010 2 0 {name=p14 sig_type=std_logic lab=t4}
+C {lab_pin.sym} 830 -1040 2 0 {name=p15 sig_type=std_logic lab=t5}
+C {lab_pin.sym} 830 -1070 2 0 {name=p16 sig_type=std_logic lab=t6}

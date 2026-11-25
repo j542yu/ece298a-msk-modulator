@@ -8,13 +8,13 @@
 V1 net1 GND 3.3
 x1 clk net1 rst_n dac_parax_out GND GND GND GND GND GND GND data_in enable GND GND GND GND GND GND
 + GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND GND
-+ GND GND GND GND GND GND net1 tt_um_ece298a_msk_modulator_parax
++ GND GND GND GND GND GND net1 t6 t5 t4 t3 t2 t1 t0 b4 b3 b2 b1 b0 tt_um_ece298a_msk_modulator_parax
 **** begin user architecture code
 
 .option wnflag=1
 
 .control
-    tran 5n 850ns
+    tran 10n 500ns
     write tb_mixed_layout_parax.raw
 .endc
 
@@ -25,12 +25,16 @@ x1 clk net1 rst_n dac_parax_out GND GND GND GND GND GND GND data_in enable GND G
 
 .include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice cap_mim
 .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice moscap_typical
+.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+* .lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_statistical
 
 **** end user architecture code
 **.ends
 
-* expanding   symbol:  tt_um_ece298a_msk_modulator_parax.sym # of pins=52
+* expanding   symbol:  tt_um_ece298a_msk_modulator_parax.sym # of pins=64
 ** sym_path: /home/j542yu/Documents/ece298a-msk-modem/xschem/tt_um_ece298a_msk_modulator_parax.sym
 .include ../../mag/spice/tt_um_ece298a_msk_modulator_parax.spice
 .GLOBAL GND
