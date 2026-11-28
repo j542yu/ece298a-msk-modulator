@@ -49,21 +49,21 @@ DEFAULT_PIN_SIZE = {
 # Pins are placed in the order specified here.
 
 PINS = {
-    "top": [
+    "top": [],
+
+    "bottom": [
         {"name": "clk",     "direction": "INPUT"},
         {"name": "rst_n",   "direction": "INPUT"},
         {"name": "data_in", "direction": "INPUT"},
         {"name": "enable",  "direction": "INPUT"},
     ],
 
-    "bottom": [],
-
-    "left": [],
-
-    "right": [
+    "left": [
         {"name": "T[6:0]", "direction": "OUTPUT", "spacing": 4.5},
         {"name": "B[4:0]", "direction": "OUTPUT", "spacing": 14.5},
     ],
+
+    "right": [],
 }
 
 
@@ -87,7 +87,7 @@ SIDE_CONFIG = {
     },
 
     "bottom": {
-        "alignment": "right",
+        "alignment": "left",
         "spacing": 7.35,
         "clearance": 14,
         "size": (0.3, 1.0),
