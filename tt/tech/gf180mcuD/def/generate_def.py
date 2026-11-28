@@ -58,12 +58,12 @@ PINS = {
 
     "bottom": [],
 
-    "left": [
+    "left": [],
+
+    "right": [
         {"name": "T[6:0]", "direction": "OUTPUT", "spacing": 4.5},
         {"name": "B[4:0]", "direction": "OUTPUT", "spacing": 14.5},
     ],
-
-    "right": [],
 }
 
 
