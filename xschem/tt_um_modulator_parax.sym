@@ -7,7 +7,7 @@ template="name=x1"
 
 * assuming current dir is xschem/simulation and
 * mag/ is at same level as xschem/
-spice_sym_def=".include ../../mag/spice/tt_um_transmit_5_3_parax.spice"}
+spice_sym_def=".include ../../mag/spice/tt_um_modulator_parax.spice"}
 V {}
 S {}
 E {}
@@ -64,9 +64,9 @@ B 5 57.5 217.5 62.5 222.5 {name=VPWR dir=inout
 sim_pinnumber=14}
 B 5 -172.5 157.5 -167.5 162.5 {name=clk dir=in 
 sim_pinnumber=15}
-B 5 -172.5 137.5 -167.5 142.5 {name=enable dir=in 
+B 5 -172.5 -152.5 -167.5 -147.5 {name=data_in dir=in 
 sim_pinnumber=16}
-B 5 -172.5 -152.5 -167.5 -147.5 {name=in dir=in 
+B 5 -172.5 137.5 -167.5 142.5 {name=enable dir=in 
 sim_pinnumber=17}
 B 5 -172.5 177.5 -167.5 182.5 {name=rst_n dir=in 
 sim_pinnumber=18}
@@ -83,7 +83,7 @@ T {T[4]} 135 116 0 1 0.2 0.2 {}
 T {T[5]} 135 146 0 1 0.2 0.2 {}
 T {T[6]} 135 176 0 1 0.2 0.2 {}
 T {@symname} -117.5 14 0 0 0.3 0.3 {}
-T {in} -145 -154 0 0 0.2 0.2 {}
+T {data_in} -145 -154 0 0 0.2 0.2 {}
 T {@name} 125 -192 0 0 0.2 0.2 {}
 T {VGND} 86 195 3 0 0.2 0.2 {}
 T {VPWR} 56 195 3 0 0.2 0.2 {}

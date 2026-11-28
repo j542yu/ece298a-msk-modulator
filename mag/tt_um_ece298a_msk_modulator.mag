@@ -1,7 +1,7 @@
 magic
 tech gf180mcuD
 magscale 1 10
-timestamp 1795463882
+timestamp 1795627610
 << pwell >>
 rect 27180 62120 67560 62280
 rect 27180 38690 27400 62120
@@ -583,6 +583,32 @@ flabel metal4 s 800 1000 1200 64670 0 FreeSans 1600 0 0 0 VGND
 port 51 nsew ground bidirectional
 flabel metal4 s 200 430 600 64690 0 FreeSans 1600 0 0 0 VDPWR
 port 52 nsew power bidirectional
+flabel metal4 21550 62250 25360 62310 0 FreeSans 1600 0 0 0 t6
+port 53 nsew
+flabel metal4 21540 61730 24140 61790 0 FreeSans 1600 0 0 0 t5
+port 54 nsew
+flabel metal4 23230 59842 27690 59902 0 FreeSans 1600 0 0 0 t4
+port 55 nsew
+flabel metal4 24140 58942 27690 59002 0 FreeSans 1600 0 0 0 t3
+port 56 nsew
+flabel metal4 24790 58042 27670 58102 0 FreeSans 1600 0 0 0 t2
+port 57 nsew
+flabel metal4 25240 57142 27670 57202 0 FreeSans 1600 0 0 0 t1
+port 58 nsew
+flabel metal4 25790 56242 27680 56302 0 FreeSans 1600 0 0 0 t0
+port 59 nsew
+flabel metal4 24990 55342 27720 55402 0 FreeSans 1600 0 0 0 b4
+port 60 nsew
+flabel metal4 25000 52442 27700 52502 0 FreeSans 1600 0 0 0 b3
+port 61 nsew
+flabel metal4 25040 49542 27690 49602 0 FreeSans 1600 0 0 0 b2
+port 62 nsew
+flabel metal4 25070 46642 27670 46702 0 FreeSans 1600 0 0 0 b1
+port 63 nsew
+flabel metal4 25120 43742 27700 43802 0 FreeSans 1600 0 0 0 b0
+port 64 nsew
+flabel metal4 25120 43742 27700 43802 0 FreeSans 1600 0 0 0 b0
+port 65 nsew
 << properties >>
 string FIXED_BBOX 0 0 69328 65072
 << end >>

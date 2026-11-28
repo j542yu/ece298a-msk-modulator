@@ -13,8 +13,8 @@ ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=3.38565e-06
-x2=7.93236e-06
+x1=2.02161e-06
+x2=6.56832e-06
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -63,14 +63,11 @@ tclcommand="xschem raw_read $netlist_dir/tb_dac.raw tran"
 C {code_shown.sym} 1000 -430 0 0 {name=SIM only_toplevel=false value=".option wnflag=1
 
 .control
-    tran 10p 7us
+    tran 1n 7us
     write tb_dac.raw
 .endc
 "}
 C {code_shown.sym} 1000 -270 0 0 {name=STIMULI only_toplevel=false value=".include stimuli/dac_ramp_sampling-50.0MHz_3.3V_5_3.spice"}
-C {code_shown.sym} 1000 -530 0 0 {name=CORNER only_toplevel=false value=".include /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/design.ngspice
-.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
-.lib /usr/local/share/pdk/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_typical"}
 C {dac_5_3_parax.sym} 430 -980 0 0 {name=x2}
 C {lab_pin.sym} 220 -1160 0 0 {lab=B_5_3[4:0]}
 C {bus_tap.sym} 220 -1140 1 0 {name=l2 lab=[0]}
@@ -93,3 +90,14 @@ C {ipin.sym} 170 -700 0 0 {name=p1 lab=B_5_3[4:0]}
 C {ipin.sym} 170 -680 0 0 {name=p2 lab=T_5_3[6:0]}
 C {opin.sym} 470 -700 0 0 {name=p3 lab=DAC_SCH_OUT}
 C {gnd.sym} 360 -650 0 0 {name=l14 lab=GND}
+C {devices/code_shown.sym} 990 -640 0 0 {name=MODELS only_toplevel=true
+format="tcleval( @value )"
+value="
+.include $::180MCU_MODELS/design.ngspice
+.lib $::180MCU_MODELS/sm141064.ngspice typical
+.lib $::180MCU_MODELS/sm141064.ngspice cap_mim
+.lib $::180MCU_MODELS/sm141064.ngspice res_typical
+.lib $::180MCU_MODELS/sm141064.ngspice moscap_typical
+.lib $::180MCU_MODELS/sm141064.ngspice mimcap_typical
+* .lib $::180MCU_MODELS/sm141064.ngspice res_statistical
+"}
